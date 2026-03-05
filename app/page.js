@@ -4,10 +4,7 @@ import StepIndicator from "@/components/StepIndicator";
 import CartItem from "@/components/CartItem";
 import CartHydrator from "@/components/CartHydrator";
 
-// SERVER COMPONENT — data fetched at request time (SSR)
-// REPLACE with this:
 async function getCartData() {
-  // Simulates an async SSR data fetch (e.g. from a real DB or external API)
   await new Promise((resolve) => setTimeout(resolve, 0));
   return {
     cartItems: [
