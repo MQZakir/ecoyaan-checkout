@@ -1,4 +1,3 @@
-import { headers } from "next/headers";
 import Link from "next/link";
 import Header from "@/components/Header";
 import StepIndicator from "@/components/StepIndicator";
@@ -6,19 +5,32 @@ import CartItem from "@/components/CartItem";
 import CartHydrator from "@/components/CartHydrator";
 
 // SERVER COMPONENT — data fetched at request time (SSR)
+// REPLACE with this:
 async function getCartData() {
-  // In production, this would be an external API call.
-  // We simulate SSR by fetching our own API route.
-  const headersList = headers();
-  const host = headersList.get("host") || "localhost:3000";
-  const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
-
-  const res = await fetch(`${protocol}://${host}/api/cart`, {
-    cache: "no-store", // Ensures SSR — never cached
-  });
-
-  if (!res.ok) throw new Error("Failed to fetch cart");
-  return res.json();
+  // Simulates an async SSR data fetch (e.g. from a real DB or external API)
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  return {
+    cartItems: [
+      {
+        product_id: 101,
+        product_name: "Bamboo Toothbrush (Pack of 4)",
+        product_price: 299,
+        quantity: 2,
+        image: "",
+        description: "Biodegradable, BPA-free bristles",
+      },
+      {
+        product_id: 102,
+        product_name: "Reusable Cotton Produce Bags",
+        product_price: 450,
+        quantity: 1,
+        image: "",
+        description: "Set of 5, organic cotton mesh",
+      },
+    ],
+    shipping_fee: 50,
+    discount_applied: 0,
+  };
 }
 
 export default async function CartPage() {
